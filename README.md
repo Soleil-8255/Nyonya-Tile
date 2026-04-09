@@ -49,8 +49,6 @@ This prototype is specifically designed to align with the research goals of the 
 
 ## ▌ 05. ACADEMIC PROFILE: SULEI (SOLEIL)
 I am a **First-year Computer Science** student at the **University of Nottingham Malaysia (UNM)**.
-* **Academic Standing:** **First Class Honors (Avg: 78%)**.
-* **Core Competencies:** Programming Paradigms, Databases & Interfaces, Linear Algebra, and Multilingual Research.
 * **Vision:** To become a researcher who utilizes technology to protect vanishing cultures through immersive, human-centric design.
 
 ---
