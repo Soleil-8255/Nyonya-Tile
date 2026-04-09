@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nyonya Heritage: Digital Echoes of the Straits</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f8f1e5;
+    --dark-wood: #1a120b;
+    --gold: #d4af37;
+    --teal: #2a5a5c;
+    --rose: #b5495b;
+    --indigo: #2c3e50;
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body.night-mode {
+    --dark-wood: #0a0805;
+    --cream: #d1c7b7;
+    --gold: #b08d26;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: var(--dark-wood);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+    transition: var(--transition);
+    overflow-x: hidden;
+  }
+
+  /* Header Section */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 1.2s ease;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .header p {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  /* Main Interactive Area */
+  .main-container {
+    display: flex;
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* Tile Section */
+  .tile-section {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .tile-container {
+    width: 450px;
+    height: 450px;
+    background: var(--cream);
+    border: 12px solid var(--gold);
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    cursor: crosshair;
+    transition: var(--transition);
+  }
+
+  .tile-container svg { width: 100%; height: 100%; display: block; }
+
+  /* Info Panel */
+  .info-panel {
+    flex: 1;
+    max-width: 450px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 2rem;
+    border-radius: 4px;
+    animation: fadeInRight 1.5s ease;
+  }
+
+  .info-panel h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 0.5rem;
+  }
+
+  /* Palette Control */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .color-swatch {
+    height: 35px;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .color-swatch:hover { transform: scale(1.1); border-color: var(--gold); }
+
+  /* Buttons */
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .custom-btn {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.8rem;
+    flex: 1;
+  }
+
+  .custom-btn:hover { background: var(--gold); color: var(--dark-wood); }
+
+  /* Overlay Panels */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .overlay.active { display: flex; }
+
+  .content-box {
+    max-width: 600px;
+    background: var(--dark-wood);
+    border: 1px solid var(--gold);
+    padding: 3rem;
+    position: relative;
+    box-shadow: 0 0 100px rgba(212,175,55,0.1);
+  }
+
+  .typewriter {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .hint-text {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" loop src="bg-music.mp3"></audio>
+
+<div class="header">
+  <h1>Nyonya Digital Heritage</h1>
+  <p>"Echoes of the Straits: A Peranakan Aesthetic Exploration"</p>
+</div>
+
+<div class="main-container">
+  <div class="tile-section">
+    <div class="tile-container" id="tile">
+      <svg viewBox="0 0 400 400" id="mainSvg">
+        <rect width="400" height="400" id="tileBg" fill="#f8f1e5" />
+        
+        <rect x="10" y="10" width="380" height="380" fill="none" stroke="#d4af37" stroke-width="4" />
+        <path d="M10,10 Q200,50 390,10" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5" />
+        
+        <g id="floralPattern" style="cursor: pointer;">
+          <circle cx="200" cy="200" r="80" id="centerFlower" fill="#b5495b" opacity="0.8" />
+          <path d="M200,120 Q240,160 200,200 Q160,160 200,120" fill="#2a5a5c" class="petal" />
+          <path d="M280,200 Q240,240 200,200 Q240,160 280,200" fill="#2a5a5c" class="petal" />
+          <path d="M200,280 Q160,240 200,200 Q240,240 200,280" fill="#2a5a5c" class="petal" />
+          <path d="M120,200 Q160,160 200,200 Q160,240 120,200" fill="#2a5a5c" class="petal" />
+          <path d="M200,100 C250,100 270,150 200,200" fill="none" stroke="#d4af37" stroke-width="2" id="phoenixLeft" />
+          <path d="M200,100 C150,100 130,150 200,200" fill="none" stroke="#d4af37" stroke-width="2" id="phoenixRight" />
+        </g>
+      </svg>
+    </div>
+    <p class="hint-text">Interact with the patterns to reveal hidden narratives.</p>
+  </div>
+
+  <div class="info-panel">
+    <h2>Interactive Console</h2>
+    
+    <div style="margin-bottom: 1.5rem;">
+      <p style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--gold);">Design Palette</p>
+      <div class="palette-grid">
+        <div class="color-swatch" style="background: #b5495b;" onclick="changeColor('rose')"></div>
+        <div class="color-swatch" style="background: #2a5a5c;" onclick="changeColor('teal')"></div>
+        <div class="color-swatch" style="background: #2c3e50;" onclick="changeColor('indigo')"></div>
+        <div class="color-swatch" style="background: #d4af37;" onclick="changeColor('gold')"></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 1.5rem;">
+      <p style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--gold);">Ambient Settings</p>
+      <button class="custom-btn" onclick="toggleNightMode()">Toggle Day/Night Mode</button>
+    </div>
+
+    <h2>Heritage Insights</h2>
+    <p style="font-size: 0.85rem; line-height: 1.6; opacity: 0.8;">
+      Nyonya tiles, or "Majolica tiles," were imported to the Straits Settlements in the early 20th century. They symbolize the hybrid identity of the Peranakan community, blending Victorian techniques with Chinese symbolism.
+    </p>
+
+    <div class="btn-group">
+      <button class="custom-btn" onclick="openStory('intro')">Begin Narrative</button>
+      <button class="custom-btn" onclick="openResearchNote()">Research Note</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="storyOverlay">
+  <div class="content-box">
+    <span class="close-btn" onclick="closeStory()">×</span>
+    <div id="typewriter" class="typewriter"></div>
+    <div class="choice-container" id="choices"></div>
+  </div>
+</div>
+
+
+<div class="overlay" id="noteOverlay">
+  <div class="content-box" style="max-width: 800px; border-color: #5aad87;">
+    <span class="close-btn" onclick="closeNote()">×</span>
+    <h2 style="font-family: 'Cinzel', serif; color: #5aad87; margin-bottom: 1.5rem;">HCI Research Methodology</h2>
+    <div style="font-size: 0.9rem; line-height: 1.8; color: #f8f1e5; text-align: left;">
+      <p><strong>1. Theoretical Framework:</strong> This prototype leverages <em>Digital Storytelling</em> and <em>Tangible Interaction</em> concepts to lower the barrier for cultural heritage engagement.</p>
+      <br>
+      <p><strong>2. User-Centric Design:</strong> Inspired by Dr. Marina's 2026 research on <strong>No-code authoring tools</strong>, I utilized AI-assisted rapid prototyping to iterate user flows, ensuring accessibility for non-technical users.</p>
+      <br>
+      <p><strong>3. Narrative Engine:</strong> The branching logic simulates <em>Heuristic Exploration</em>, allowing users to build a personal connection with artifacts through "Digital Dialogues" rather than passive observation.</p>
+      <br>
+      <p><strong>4. Future Scope:</strong> I plan to integrate <em>Augmented Reality (AR)</em> markers to overlay these digital narratives onto physical Nyonya tiles in a museum setting, enhancing the <em>Presence</em> and <em>Immersion</em> factors.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // UI Logic
+  function changeColor(theme) {
+    const colors = {
+      rose: '#b5495b',
+      teal: '#2a5a5c',
+      indigo: '#2c3e50',
+      gold: '#d4af37'
+    };
+    document.getElementById('centerFlower').setAttribute('fill', colors[theme]);
+    document.querySelectorAll('.petal').forEach(p => p.setAttribute('stroke', colors[theme]));
+  }
+
+  function toggleNightMode() {
+    document.body.classList.toggle('night-mode');
+  }
+
+  // Story Data
+  const stories = {
+    intro: {
+      text: "You touch the cold surface of the ceramic. A faint hum resonates. 'I have witnessed a century of footsteps,' a voice whispers. 'I am a fragment of a world where East and West met in a glaze of fire.'",
+      choices: [
+        { text: "Ask about the Artisan's hand", target: "artisan" },
+        { text: "Ask about the Grand Mansion it once adorned", target: "mansion" }
+      ]
+    },
+    artisan: {
+      text: "The artisan was a master of fire. He blended cobalt from Europe with the auspicious motifs of the Middle Kingdom. 'Every air bubble in my glaze,' he would say, 'is a breath of the ancestors.'",
+      choices: [
+        { text: "Inquire about the Peony Symbolism", target: "peony" },
+        { text: "Go back to the beginning", target: "intro" }
+      ]
+    },
+    mansion: {
+      text: "I lived on the walls of a mansion in Malacca. I saw the decline of empires and the rise of new dawn. I tasted the salt of the sea air and the scent of jasmine tea.",
+      choices: [
+        { text: "Ask about the hidden secrets of the Mansion", target: "secret" },
+        { text: "Go back to the beginning", target: "intro" }
+      ]
+    },
+    peony: {
+      text: "The Peony is the Queen of Flowers. In our culture, it represents nobility and honor. By digitizing me, you are ensuring that this 'honor' never fades into the dust of history.",
+      choices: [
+        { text: "End the exploration", target: "end" }
+      ]
+    },
+    secret: {
+      text: "Behind the heavy teak doors, stories of love and loss were whispered. Digital heritage isn't just about pixels; it's about capturing these invisible ghosts of memory.",
+      choices: [
+        { text: "End the exploration", target: "end" }
+      ]
+    },
+    end: {
+      text: "The whispers fade. The tile remains. You have bridged the gap between a physical past and a digital future. Thank you for listening.",
+      choices: [
+        { text: "Restart", target: "intro" }
+      ]
+    }
+  };
+
+  // Typewriter Logic
+  let typeInterval;
+  function openStory(key) {
+    const overlay = document.getElementById('storyOverlay');
+    const container = document.getElementById('typewriter');
+    const choices = document.getElementById('choices');
+    
+    overlay.classList.add('active');
+    container.innerHTML = "";
+    choices.innerHTML = "";
+    
+    const story = stories[key];
+    let i = 0;
+    
+    clearInterval(typeInterval);
+    typeInterval = setInterval(() => {
+      if (i < story.text.length) {
+        container.innerHTML += story.text.charAt(i);
+        i++;
+      } else {
+        clearInterval(typeInterval);
+        showChoices(story.choices);
+      }
+    }, 40);
+  }
+
+  function showChoices(choiceArray) {
+    const container = document.getElementById('choices');
+    choiceArray.forEach(choice => {
+      const btn = document.createElement('button');
+      btn.className = "custom-btn";
+      btn.innerText = choice.text;
+      btn.onclick = () => openStory(choice.target);
+      container.appendChild(btn);
+    });
+  }
+
+  function closeStory() {
+    document.getElementById('storyOverlay').classList.remove('active');
+  }
+
+  // Bind Tile Click
+  document.getElementById('floralPattern').onclick = () => openStory('intro');
+
+function openResearchNote() {
+    document.getElementById('noteOverlay').classList.add('active');
+}
+
+function closeNote() {
+    document.getElementById('noteOverlay').classList.remove('active');
+}
+</script>
+</body>
+</html>
