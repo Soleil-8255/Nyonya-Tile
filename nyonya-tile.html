@@ -15,15 +15,16 @@
     --indigo: #2c3e50;
     --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
   body.night-mode {
-    --dark-wood: #0a0805;
-    --cream: #d1c7b7;
-    --gold: #b08d26;
+    --dark-wood: #080604;
+    --cream: #c2b8a3;
+    --gold: #a6841c;
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   body {
     min-height: 100vh;
     background: var(--dark-wood);
@@ -36,30 +37,26 @@
     transition: var(--transition);
     overflow-x: hidden;
   }
-
-  /* Header Section */
   .header {
     text-align: center;
     margin-bottom: 3rem;
-    animation: fadeInDown 1.2s ease;
+    animation: fadeInDown 1.5s ease;
   }
-
   .header h1 {
     font-family: 'Cinzel', serif;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--gold);
     letter-spacing: 0.15em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
   }
-
   .header p {
     font-style: italic;
     font-family: 'Playfair Display', serif;
     opacity: 0.7;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    font-size: 1.1rem;
   }
-
-  /* Main Interactive Area */
   .main-container {
     display: flex;
     gap: 4rem;
@@ -69,144 +66,196 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
-
-  /* Tile Section */
   .tile-section {
     position: relative;
     flex: 0 0 auto;
+    text-align: center;
+    max-width: 500px;
   }
-
   .tile-container {
-    width: 450px;
-    height: 450px;
-    background: var(--cream);
-    border: 12px solid var(--gold);
+    width: 480px;
+    height: 480px;
+    background: rgba(0,0,0,0.5);
+    border: 14px solid var(--gold);
     position: relative;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
     cursor: crosshair;
     transition: var(--transition);
+    overflow: hidden;
+    border-radius: 4px;
   }
-
-  .tile-container svg { width: 100%; height: 100%; display: block; }
-
-  /* Info Panel */
+  .tile-container:hover {
+    transform: scale(1.03) translateY(-12px);
+    box-shadow: 0 40px 100px rgba(212,175,55,0.25);
+    border-color: #fff;
+  }
+  .real-artifact-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: var(--transition);
+  }
+  .tile-container:hover .real-artifact-image {
+    filter: brightness(1.15) contrast(1.05);
+  }
+  .thumbnail-ribbon {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  .thumb {
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition);
+    object-fit: cover;
+    opacity: 0.4;
+    border-radius: 2px;
+  }
+  .thumb:hover {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+  .thumb.active {
+    opacity: 1;
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  }
   .info-panel {
     flex: 1;
-    max-width: 450px;
-    background: rgba(255,255,255,0.03);
+    max-width: 480px;
+    background: rgba(255,255,255,0.02);
     border: 1px solid rgba(212, 175, 55, 0.2);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 4px;
     animation: fadeInRight 1.5s ease;
   }
-
   .info-panel h2 {
     font-family: 'Cinzel', serif;
     color: var(--gold);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 1.5rem;
     border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
+    letter-spacing: 0.1em;
   }
-
-  /* Palette Control */
-  .palette-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 2rem;
-  }
-
-  .color-swatch {
-    height: 35px;
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .color-swatch:hover { transform: scale(1.1); border-color: var(--gold); }
-
-  /* Buttons */
   .btn-group {
     display: flex;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
   }
-
   .custom-btn {
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 1.5rem;
     background: transparent;
     border: 1px solid var(--gold);
     color: var(--gold);
     font-family: 'Cinzel', serif;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     flex: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
-
-  .custom-btn:hover { background: var(--gold); color: var(--dark-wood); }
-
-  /* Overlay Panels */
+  .custom-btn:hover {
+    background: var(--gold);
+    color: var(--dark-wood);
+    box-shadow: 0 0 15px rgba(212,175,55,0.4);
+  }
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(10, 8, 5, 0.95);
     z-index: 1000;
     display: none;
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    backdrop-filter: blur(5px);
   }
-
-  .overlay.active { display: flex; }
-
+  .overlay.active {
+    display: flex;
+    animation: fadeIn 0.8s ease;
+  }
   .content-box {
-    max-width: 600px;
+    max-width: 700px;
+    width: 100%;
     background: var(--dark-wood);
     border: 1px solid var(--gold);
-    padding: 3rem;
+    padding: 4rem 3rem;
     position: relative;
-    box-shadow: 0 0 100px rgba(212,175,55,0.1);
+    box-shadow: 0 0 120px rgba(212,175,55,0.15);
   }
-
   .typewriter {
     font-family: 'Playfair Display', serif;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    line-height: 2.2;
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    color: #fff;
+    min-height: 150px;
   }
-
   .choice-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
   }
-
+  .choice-container .custom-btn {
+    text-align: left;
+    padding: 1.2rem 2rem;
+    border-color: rgba(212,175,55,0.4);
+    color: #e0d5c1;
+    font-family: 'Raleway', sans-serif;
+    text-transform: none;
+    font-size: 1.05rem;
+  }
+  .choice-container .custom-btn:hover {
+    background: rgba(212,175,55,0.1);
+    color: var(--gold);
+    border-color: var(--gold);
+    padding-left: 2.5rem;
+  }
   .close-btn {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 2rem;
     color: var(--gold);
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    transition: transform 0.3s;
   }
-
+  .close-btn:hover {
+    transform: rotate(90deg);
+  }
+  .fade-out {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
   @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
+    from { opacity: 0; transform: translateY(-40px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes fadeInRight {
-    from { opacity: 0; transform: translateX(30px); }
+    from { opacity: 0; transform: translateX(40px); }
     to { opacity: 1; transform: translateX(0); }
   }
-
   .hint-text {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    opacity: 0.5;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
     text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 </style>
 </head>
@@ -221,53 +270,32 @@
 
 <div class="main-container">
   <div class="tile-section">
-    <div class="tile-container" id="tile">
-      <svg viewBox="0 0 400 400" id="mainSvg">
-        <rect width="400" height="400" id="tileBg" fill="#f8f1e5" />
-        
-        <rect x="10" y="10" width="380" height="380" fill="none" stroke="#d4af37" stroke-width="4" />
-        <path d="M10,10 Q200,50 390,10" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5" />
-        
-        <g id="floralPattern" style="cursor: pointer;">
-          <circle cx="200" cy="200" r="80" id="centerFlower" fill="#b5495b" opacity="0.8" />
-          <path d="M200,120 Q240,160 200,200 Q160,160 200,120" fill="#2a5a5c" class="petal" />
-          <path d="M280,200 Q240,240 200,200 Q240,160 280,200" fill="#2a5a5c" class="petal" />
-          <path d="M200,280 Q160,240 200,200 Q240,240 200,280" fill="#2a5a5c" class="petal" />
-          <path d="M120,200 Q160,160 200,200 Q160,240 120,200" fill="#2a5a5c" class="petal" />
-          <path d="M200,100 C250,100 270,150 200,200" fill="none" stroke="#d4af37" stroke-width="2" id="phoenixLeft" />
-          <path d="M200,100 C150,100 130,150 200,200" fill="none" stroke="#d4af37" stroke-width="2" id="phoenixRight" />
-        </g>
-      </svg>
+    <div class="tile-container" id="tile" onclick="triggerCurrentStory()">
+      <img src="1.jpg" alt="Artifact" class="real-artifact-image" id="activeImage">
     </div>
-    <p class="hint-text">Interact with the patterns to reveal hidden narratives.</p>
+    <div class="thumbnail-ribbon" id="thumbRibbon"></div>
+    <p class="hint-text">Select an artifact. Click to initiate the narrative engine.</p>
   </div>
 
   <div class="info-panel">
-    <h2>Interactive Console</h2>
-    
-    <div style="margin-bottom: 1.5rem;">
-      <p style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--gold);">Design Palette</p>
-      <div class="palette-grid">
-        <div class="color-swatch" style="background: #b5495b;" onclick="changeColor('rose')"></div>
-        <div class="color-swatch" style="background: #2a5a5c;" onclick="changeColor('teal')"></div>
-        <div class="color-swatch" style="background: #2c3e50;" onclick="changeColor('indigo')"></div>
-        <div class="color-swatch" style="background: #d4af37;" onclick="changeColor('gold')"></div>
-      </div>
+    <h2>Sensory Controls</h2>
+    <div style="margin-bottom: 2rem;">
+      <button class="custom-btn" id="musicBtn" onclick="toggleMusic()">Play Ambient Soundscape ♫</button>
     </div>
 
-    <div style="margin-bottom: 1.5rem;">
-      <p style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--gold);">Ambient Settings</p>
-      <button class="custom-btn" onclick="toggleNightMode()">Toggle Day/Night Mode</button>
+    <h2>Environmental Context</h2>
+    <div style="margin-bottom: 2rem;">
+      <button class="custom-btn" onclick="toggleNightMode()">Toggle Chrono-Lighting</button>
     </div>
 
-    <h2>Heritage Insights</h2>
-    <p style="font-size: 0.85rem; line-height: 1.6; opacity: 0.8;">
-      Nyonya tiles, or "Majolica tiles," were imported to the Straits Settlements in the early 20th century. They symbolize the hybrid identity of the Peranakan community, blending Victorian techniques with Chinese symbolism.
+    <h2 id="insightTitle">The Imperial Rose</h2>
+    <p id="insightText" style="font-size: 0.95rem; line-height: 1.8; opacity: 0.85; margin-bottom: 2rem;">
+      A symbol of prosperity and feminine grace, the rose motif reflects the refined aesthetics of the early 20th century Peranakan mansion. It represents the quiet strength of the matriarchs who ruled the domestic sphere.
     </p>
 
     <div class="btn-group">
-      <button class="custom-btn" onclick="openStory('intro')">Begin Narrative</button>
-      <button class="custom-btn" onclick="openResearchNote()">Research Note</button>
+      <button class="custom-btn" onclick="triggerCurrentStory()">Explore Echoes</button>
+      <button class="custom-btn" onclick="openResearchNote()">Methodology</button>
     </div>
   </div>
 </div>
@@ -280,86 +308,257 @@
   </div>
 </div>
 
-
 <div class="overlay" id="noteOverlay">
-  <div class="content-box" style="max-width: 800px; border-color: #5aad87;">
+  <div class="content-box" style="max-width: 850px; border-color: #4a9b8e;">
     <span class="close-btn" onclick="closeNote()">×</span>
-    <h2 style="font-family: 'Cinzel', serif; color: #5aad87; margin-bottom: 1.5rem;">HCI Research Methodology</h2>
-    <div style="font-size: 0.9rem; line-height: 1.8; color: #f8f1e5; text-align: left;">
-      <p><strong>1. Theoretical Framework:</strong> This prototype leverages <em>Digital Storytelling</em> and <em>Tangible Interaction</em> concepts to lower the barrier for cultural heritage engagement.</p>
+    <h2 style="font-family: 'Cinzel', serif; color: #4a9b8e; margin-bottom: 2rem; font-size: 1.8rem;">HCI & Preservation Architecture</h2>
+    <div style="font-size: 1.05rem; line-height: 2; color: #e0d5c1; text-align: left; font-family: 'Raleway', sans-serif;">
+      <p><strong>01. High-Fidelity Digitization:</strong> This interactive architecture transcends basic web design by treating authentic photographic textures as the primary UI layer. By preserving the 'Tactile Soul' of the Majolica tile, we prevent the historical flattening common in digital archives.</p>
       <br>
-      <p><strong>2. User-Centric Design:</strong> Inspired by Dr. Marina's 2026 research on <strong>No-code authoring tools</strong>, I utilized AI-assisted rapid prototyping to iterate user flows, ensuring accessibility for non-technical users.</p>
+      <p><strong>02. Cognitive Affordances:</strong> Utilizing principles from advanced Human-Computer Interaction, specific CSS transformation matrices and luminous filters are applied during pointer events. This non-verbal feedback loop subconsciously trains the user to recognize the artifact as an interactive narrative portal.</p>
       <br>
-      <p><strong>3. Narrative Engine:</strong> The branching logic simulates <em>Heuristic Exploration</em>, allowing users to build a personal connection with artifacts through "Digital Dialogues" rather than passive observation.</p>
+      <p><strong>03. Heuristic Branching Narrative:</strong> Moving away from linear pedagogical models, this prototype utilizes a multi-nodal storytelling engine. It requires the user to make ontological choices, transforming them from a passive museum observer into an active historian. This significantly deepens cognitive retention.</p>
       <br>
-      <p><strong>4. Future Scope:</strong> I plan to integrate <em>Augmented Reality (AR)</em> markers to overlay these digital narratives onto physical Nyonya tiles in a museum setting, enhancing the <em>Presence</em> and <em>Immersion</em> factors.</p>
+      <p><strong>04. No-Code & Vibe Coding Paradigms:</strong> Developed through LLM-assisted rapid prototyping, this project embodies the democratization of digital humanities. It aligns strictly with recent literature advocating for accessible authoring tools that empower cultural stakeholders to build their own immersive serious games.</p>
     </div>
   </div>
 </div>
 
 <script>
-  // UI Logic
-  function changeColor(theme) {
-    const colors = {
-      rose: '#b5495b',
-      teal: '#2a5a5c',
-      indigo: '#2c3e50',
-      gold: '#d4af37'
-    };
-    document.getElementById('centerFlower').setAttribute('fill', colors[theme]);
-    document.querySelectorAll('.petal').forEach(p => p.setAttribute('stroke', colors[theme]));
+  let isPlaying = false;
+  function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      const btn = document.getElementById('musicBtn');
+      if (isPlaying) {
+          music.pause();
+          btn.innerText = "Play Ambient Soundscape ♫";
+      } else {
+          music.play();
+          btn.innerText = "Pause Soundscape ||";
+      }
+      isPlaying = !isPlaying;
   }
 
   function toggleNightMode() {
     document.body.classList.toggle('night-mode');
   }
 
-  // Story Data
+  const tileCollection = [
+    {
+      src: '1.jpg',
+      title: 'The Imperial Rose',
+      insight: 'A symbol of prosperity and feminine grace, the rose motif reflects the refined aesthetics of the early 20th century Peranakan mansion. It represents the quiet strength of the matriarchs who ruled the domestic sphere.',
+      storyKey: 'r_start'
+    },
+    {
+      src: '2.jpg',
+      title: 'Geometric Harmony',
+      insight: 'Inspired by European Islamic tiles, these geometric patterns represent the mathematical precision and orderly life of the Straits merchants. The symmetry reflects the balance of trade and tradition.',
+      storyKey: 'g_start'
+    },
+    {
+      src: '3.jpg',
+      title: 'Azure Tides',
+      insight: 'The deep blue palette is a tribute to the South China Sea, the vital artery that allowed the Nyonya culture to flourish through the maritime silk road. It speaks of monsoons and long voyages.',
+      storyKey: 's_start'
+    },
+    {
+      src: '4.jpg',
+      title: 'The Artisan Memory',
+      insight: 'Every glaze contains a hidden memory of the fire. This tile shows the delicate brushwork of a master craftsman in the Malacca guild, blending Minton dust-pressing techniques with Asian artistry.',
+      storyKey: 'a_start'
+    },
+    {
+      src: '5.jpg',
+      title: 'Eternal Legacy',
+      insight: 'This final piece represents the durability of heritage. Though the grand mansions of Heeren Street may crumble, the digital dialogue remains immortal within the architecture of code.',
+      storyKey: 'l_start'
+    }
+  ];
+
+  let currentTileIndex = 0;
+  const ribbon = document.getElementById('thumbRibbon');
+
+  tileCollection.forEach((tile, index) => {
+    const img = document.createElement('img');
+    img.src = tile.src;
+    img.className = `thumb ${index === 0 ? 'active' : ''}`;
+    img.onclick = () => switchTile(index);
+    ribbon.appendChild(img);
+  });
+
+  function switchTile(index) {
+    if (index === currentTileIndex) return;
+    const display = document.getElementById('activeImage');
+    const thumbs = document.querySelectorAll('.thumb');
+    
+    display.classList.add('fade-out');
+    
+    setTimeout(() => {
+      currentTileIndex = index;
+      display.src = tileCollection[index].src;
+      document.getElementById('insightTitle').innerText = tileCollection[index].title;
+      document.getElementById('insightText').innerText = tileCollection[index].insight;
+      
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumbs[index].classList.add('active');
+      
+      display.classList.remove('fade-out');
+    }, 500);
+  }
+
   const stories = {
-    intro: {
-      text: "You touch the cold surface of the ceramic. A faint hum resonates. 'I have witnessed a century of footsteps,' a voice whispers. 'I am a fragment of a world where East and West met in a glaze of fire.'",
+    r_start: {
+      text: "The Imperial Rose glows faintly as your cursor brushes its surface. A scent of jasmine and stale incense seems to drift from the screen. 'I was chosen for the bridal chamber,' a voice whispers, carrying the weight of a century. 'Twelve days the Choon Tok wedding lasted. Twelve days of gongs, silk, and silent tears. My petals have absorbed a thousand secrets of love and duty.'",
       choices: [
-        { text: "Ask about the Artisan's hand", target: "artisan" },
-        { text: "Ask about the Grand Mansion it once adorned", target: "mansion" }
+        { text: "Ask about the matriarchs who walked upon it.", target: "r_matriarch" },
+        { text: "Inquire about the twelve-day wedding traditions.", target: "r_wedding" }
       ]
     },
-    artisan: {
-      text: "The artisan was a master of fire. He blended cobalt from Europe with the auspicious motifs of the Middle Kingdom. 'Every air bubble in my glaze,' he would say, 'is a breath of the ancestors.'",
+    r_matriarch: {
+      text: "'The Bibiks,' the tile hums with a deep resonance. 'They wore sheer kebaya and heavy gold kerosang. They ruled the domestic empire with iron wills masked by velvet manners. I felt the sharp click of their beaded slippers, the Kasut Manek, pacing the floors as they arranged marriages and managed estates. They were the true architects of our wealth.'",
       choices: [
-        { text: "Inquire about the Peony Symbolism", target: "peony" },
-        { text: "Go back to the beginning", target: "intro" }
+        { text: "Ask how the women expressed their silent emotions.", target: "r_emotion" },
+        { text: "Return to the exhibition gallery.", target: "close" }
       ]
     },
-    mansion: {
-      text: "I lived on the walls of a mansion in Malacca. I saw the decline of empires and the rise of new dawn. I tasted the salt of the sea air and the scent of jasmine tea.",
+    r_wedding: {
+      text: "'Ah, the Choon Tok. The house was draped in red silk. The bride, barely sixteen, sat under a crown of gold and kingfisher feathers so heavy she could not bow her head. I watched the groom lift her veil. Her face was painted white, her lips a tiny crimson dot. It was a union of families, of wealth, not necessarily of hearts. Yet, enduring partnerships were forged upon my surface.'",
       choices: [
-        { text: "Ask about the hidden secrets of the Mansion", target: "secret" },
-        { text: "Go back to the beginning", target: "intro" }
+        { text: "Ask what became of that young bride.", target: "r_emotion" },
+        { text: "Return to the exhibition gallery.", target: "close" }
       ]
     },
-    peony: {
-      text: "The Peony is the Queen of Flowers. In our culture, it represents nobility and honor. By digitizing me, you are ensuring that this 'honor' never fades into the dust of history.",
+    r_emotion: {
+      text: "'Their emotions were woven into the tapestry of daily life. Joy was found in the perfect pounding of sambal, in the precise folding of Nyonya Kuih. Sorrow was swallowed with bitter tea. I absorbed it all—the laughter echoing in the inner courtyard, the muffled weeping behind heavy teak doors. I am not just baked clay; I am the diary of the Straits women.'",
       choices: [
-        { text: "End the exploration", target: "end" }
+        { text: "Conclude the Imperial Rose narrative.", target: "close" }
       ]
     },
-    secret: {
-      text: "Behind the heavy teak doors, stories of love and loss were whispered. Digital heritage isn't just about pixels; it's about capturing these invisible ghosts of memory.",
+    g_start: {
+      text: "Lines of perfect symmetry align before you. 'Order is the prerequisite for beauty,' the geometric pattern hums methodically. 'Look closely. I am not Chinese. I am not Malay. I am the logic of Islamic mathematics fused with the pragmatism of British colonizers, baked for the homes of Chinese merchants. I represent the calculated logic of the Straits Settlements.'",
       choices: [
-        { text: "End the exploration", target: "end" }
+        { text: "Ask about the merchants and their trade.", target: "g_merchant" },
+        { text: "Inquire about the architecture of the shophouses.", target: "g_architecture" }
       ]
     },
-    end: {
-      text: "The whispers fade. The tile remains. You have bridged the gap between a physical past and a digital future. Thank you for listening.",
+    g_merchant: {
+      text: "'The Baba merchants were masters of adaptation. They spoke English to the British, Malay in the markets, and Hokkien to their ancestors. Above me, the wooden abacus clicked incessantly. Fortunes in tin, rubber, and spices were calculated. They understood that to survive at the crossroads of the world, one must be as rigid in principle as my straight lines, yet as connected as my endless loops.'",
       choices: [
-        { text: "Restart", target: "intro" }
+        { text: "Ask how the wealth affected their culture.", target: "g_culture" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    g_architecture: {
+      text: "'I was laid in the front hall, the reception area. Beyond me lay the Tien Cheng, the air well. When the heavy tropical monsoons came, rain would pour directly into the center of the house, bringing 'shui'—water, wealth—into the home. The architecture was designed to capture nature's power while maintaining absolute internal order.'",
+      choices: [
+        { text: "Ask about the fusion of different architectural styles.", target: "g_culture" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    g_culture: {
+      text: "'Wealth allowed for breathtaking synthesis. Victorian wrought iron, Chinese carved wood, Dutch porcelain, and my Majolica surface. It was a golden era of cross-cultural fertilization that the world has rarely seen since. We were global citizens before the term was even invented.'",
+      choices: [
+        { text: "Conclude the Geometric Harmony narrative.", target: "close" }
+      ]
+    },
+    s_start: {
+      text: "The deep cobalt glaze seems to ripple on your screen. The faint scent of nutmeg and salt air surrounds you. 'The sea brought us wealth, but it also demanded its toll,' the blue glaze echoes. 'Without the maritime silk road, without the treacherous South China Sea, my colors would not exist, and the Nyonya culture would never have been born.'",
+      choices: [
+        { text: "Ask about the origin of the blue pigment.", target: "s_pigment" },
+        { text: "Inquire about the perilous ocean voyages.", target: "s_voyage" }
+      ]
+    },
+    s_pigment: {
+      text: "'This blue is the color of distance. The cobalt ore was mined in the arid mountains of Persia, transported along the ancient Silk Road to the roaring kilns of Jingdezhen in China, and finally shipped across the ocean to the ports of Malacca and Penang. My surface is a map of global trade routes, bound by fire.'",
+      choices: [
+        { text: "Reflect on the global nature of the artifact.", target: "s_legacy" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    s_voyage: {
+      text: "'The wooden junks were entirely dependent on the monsoon winds. They would sail south from China between December and March, laden with silk and porcelain, including tiles like me. They would wait in the Straits for months, trading for spices and tin, before the winds changed to carry them back. Many never returned, swallowed by typhoons. I survived the crossing.'",
+      choices: [
+        { text: "Ask about the cultural blending that resulted from these waits.", target: "s_legacy" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    s_legacy: {
+      text: "'Because the traders had to wait for the winds, they settled. They married local Malay and Indonesian women. The wok hei of Chinese cooking met the complex rempah spice pastes of the archipelago. Two distinct worlds collided, creating a hybrid culture infinitely more vibrant than its constituent parts. I am the floor they danced upon.'",
+      choices: [
+        { text: "Conclude the Azure Tides narrative.", target: "close" }
+      ]
+    },
+    a_start: {
+      text: "The intricate brushwork becomes visible as you zoom in. 'My master had trembling hands at the end of his life, but his spirit remained absolute,' the tile says with a quiet pride. 'I am not merely a manufactured object. I am the intersection of industrial revolution and indigenous craftsmanship.'",
+      choices: [
+        { text: "Ask about the European manufacturing origins.", target: "a_europe" },
+        { text: "Inquire about the local artisans who painted it.", target: "a_local" }
+      ]
+    },
+    a_europe: {
+      text: "'The base of my body was born of the English Industrial Revolution. The dust-pressing technique, perfected by Minton & Co., allowed for perfectly flat, durable tiles. Millions were shipped from Stoke-on-Trent to the colonies. Yet, raw industrialization lacked a soul. It needed the touch of the East.'",
+      choices: [
+        { text: "Ask how the Eastern soul was infused.", target: "a_synthesis" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    a_local: {
+      text: "'When the blank tiles arrived in the Straits, local and immigrant artisans took over. Using fine brushes, they applied the tube-lining technique, drawing raised outlines to separate the liquid glazes. They painted motifs they understood—peonies, bats, mythical beasts—reclaiming the colonial product for their own cultural narrative.'",
+      choices: [
+        { text: "Ask about the difficulty of the glazing process.", target: "a_synthesis" },
+        { text: "Return to the exhibition gallery.", target: "close" }
+      ]
+    },
+    a_synthesis: {
+      text: "'The chemistry of the kiln is a violent master. The metallic oxides used for coloring—copper for green, cobalt for blue, manganese for purple—all react differently at 1000 degrees Celsius. The artisan had to predict the future, knowing that the dull grey paste he painted would transform into brilliant jewel tones only if the fire was perfect. It was alchemy.'",
+      choices: [
+        { text: "Conclude the Artisan Memory narrative.", target: "close" }
+      ]
+    },
+    l_start: {
+      text: "A century of sunlight has washed over this final piece. The voice is no longer a whisper, but a resonant chorus of all the previous echoes. 'The merchants are gone. The grand mansions on Heeren Street crumble into dust or are sold to tourists. The physical world decays. What will you, the new digital curator, tell the future about us?'",
+      choices: [
+        { text: "I will tell them of your physical beauty, the clay and the fire.", target: "l_physical" },
+        { text: "I will tell them of your digital rebirth within the architecture of code.", target: "l_digital" }
+      ]
+    },
+    l_physical: {
+      text: "'I will tell them of the kiln's fire,' you answer. 'Of the European techniques blending perfectly with the Peranakan soul. I will document every crack and glaze.' The tile glows warmly. 'Yes. The clay is our anchor. It proves we existed. But clay shatters. Ink fades. Archives burn. What happens when the last physical tile returns to dust?'",
+      choices: [
+        { text: "We will rebuild the fragments using technology.", target: "l_climax" }
+      ]
+    },
+    l_digital: {
+      text: "'I will tell them you live in the ether now,' you type into the console. 'Through Human-Computer Interaction, your story transcends physical degradation. You are immortalized in JavaScript and server nodes.' The tile hums like a distant mainframe. 'Ah. The code is our wings. It grants us eternity. But does a pixel have a soul? Can an array store a memory of grief?'",
+      choices: [
+        { text: "Only if a human chooses to interact and empathize with it.", target: "l_climax" }
+      ]
+    },
+    l_climax: {
+      text: "'Exactly,' the voice softens into a profound, striking silence. 'A physical tile without a footstep is just cold stone. A digital interface without human empathy is dead code. You have not just scanned an image; by building this narrative engine, you have given us an interactive heartbeat. You have ensured that as long as there is curiosity, we will speak.'",
+      choices: [
+        { text: "Seal the Archive and accept the role of Curator.", target: "l_end" }
+      ]
+    },
+    l_end: {
+      text: "The screen slowly fades to a soft, respectful twilight. The artifact rests, no longer as a forgotten relic in a dusty museum, but as a living, breathing dialogue between the 19th century and tomorrow. Your portfolio is complete. Thank you, Curator.",
+      choices: [
+        { text: "Restart Narrative Engine", target: "restart" }
       ]
     }
   };
 
-  // Typewriter Logic
   let typeInterval;
+  
+  function triggerCurrentStory() {
+    openStory(tileCollection[currentTileIndex].storyKey);
+  }
+
   function openStory(key) {
+    if (key === 'restart') { triggerCurrentStory(); return; }
+    if (key === 'close') { closeStory(); return; }
+    
     const overlay = document.getElementById('storyOverlay');
     const container = document.getElementById('typewriter');
     const choices = document.getElementById('choices');
@@ -378,36 +577,33 @@
         i++;
       } else {
         clearInterval(typeInterval);
-        showChoices(story.choices);
+        story.choices.forEach(choice => {
+          const btn = document.createElement('button');
+          btn.className = "custom-btn";
+          btn.innerText = choice.text;
+          btn.onclick = () => {
+            container.innerHTML = "";
+            choices.innerHTML = "";
+            openStory(choice.target);
+          };
+          choices.appendChild(btn);
+        });
       }
-    }, 40);
-  }
-
-  function showChoices(choiceArray) {
-    const container = document.getElementById('choices');
-    choiceArray.forEach(choice => {
-      const btn = document.createElement('button');
-      btn.className = "custom-btn";
-      btn.innerText = choice.text;
-      btn.onclick = () => openStory(choice.target);
-      container.appendChild(btn);
-    });
+    }, 35);
   }
 
   function closeStory() {
     document.getElementById('storyOverlay').classList.remove('active');
+    clearInterval(typeInterval);
   }
 
-  // Bind Tile Click
-  document.getElementById('floralPattern').onclick = () => openStory('intro');
-
-function openResearchNote() {
-    document.getElementById('noteOverlay').classList.add('active');
-}
-
-function closeNote() {
-    document.getElementById('noteOverlay').classList.remove('active');
-}
+  function openResearchNote() { 
+    document.getElementById('noteOverlay').classList.add('active'); 
+  }
+  
+  function closeNote() { 
+    document.getElementById('noteOverlay').classList.remove('active'); 
+  }
 </script>
 </body>
 </html>
