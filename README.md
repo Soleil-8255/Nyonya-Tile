@@ -2,9 +2,6 @@
 > **An Advanced HCI Prototype Bridging 19th-Century Aesthetics with 21st-Century Code**
 
 [![University](https://img.shields.io/badge/University-Nottingham%20Malaysia-red)](https://www.nottingham.edu.my/)
-[![Grade](https://img.shields.io/badge/Semester%20Avg-78%25%20(First%20Class)-gold)](https://www.nottingham.edu.my/)
-[![Tech](https://img.shields.io/badge/Stack-JS%20%7C%20Blender%20%7C%20SQL-blue)](#-technical-stack)
-[![Status](https://img.shields.io/badge/Status-Research%20Prototype-green)](#)
 
 ---
 
